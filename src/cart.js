@@ -59,12 +59,23 @@ function calculateCartSubtotal(cart) {
   }, 0);
 }
 
-function notImplemented() {
-  throw new Error("Корзина ещё не реализована. Сначала прочитайте тесты.");
-}
+function calculateOrderTotal(cart, promo) {
+  const subtotal = calculateCartSubtotal(cart);
+  const delivery = subtotal >= 50000 ? 0 : 30000;
+  let discount = subtotal * 0.1;
 
-function calculateOrderTotal() {
-  return notImplemented();
+  if (promo !== "SAVE10" || subtotal < 20000) {
+    discount = 0;
+  }
+
+  const total = subtotal - discount + delivery;
+
+  return {
+    subtotal,
+    discount,
+    delivery,
+    total,
+  };
 }
 
 const cartApi = {
