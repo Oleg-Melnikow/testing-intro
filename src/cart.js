@@ -52,13 +52,17 @@ function removeFromCart(cart, productiId) {
   }, []);
 }
 
+function calculateCartSubtotal(cart) {
+  return cart.reduce((currentSum, product) => {
+    const { price, quantity } = product;
+    return currentSum + price * quantity;
+  }, 0);
+}
+
 function notImplemented() {
   throw new Error("Корзина ещё не реализована. Сначала прочитайте тесты.");
 }
 
-function calculateCartSubtotal() {
-  return notImplemented();
-}
 function calculateOrderTotal() {
   return notImplemented();
 }
