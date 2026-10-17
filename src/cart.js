@@ -18,19 +18,35 @@ function addToCart(cart, product, quantity) {
       if (cartItem.id === product.id) {
         return { ...cartItem, quantity: newQuantity };
       }
+      return cartItem;
     });
   }
 
   return [...cart, { ...product, quantity: newQuantity }];
 }
 
+function changeQuantity(cart, productiId, quantity) {
+  if (quantity < 1) {
+    throw new RangeError("Количество товара должно быть больше 0");
+  }
+
+  return cart.map((product) => {
+    if (product.id === productiId) {
+      if (product.stock < quantity) {
+        throw new RangeError(
+          "Количество товара не должно быть больше, чем есть на складе",
+        );
+      }
+      return { ...product, quantity };
+    }
+    return product;
+  });
+}
+
 function notImplemented() {
   throw new Error("Корзина ещё не реализована. Сначала прочитайте тесты.");
 }
 
-function changeQuantity() {
-  return notImplemented();
-}
 function removeFromCart() {
   return notImplemented();
 }
