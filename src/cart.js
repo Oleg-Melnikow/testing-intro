@@ -43,13 +43,19 @@ function changeQuantity(cart, productiId, quantity) {
   });
 }
 
+function removeFromCart(cart, productiId) {
+  return cart.reduce((updatedCart, product) => {
+    if (product.id !== productiId) {
+      return [...updatedCart, product];
+    }
+    return updatedCart;
+  }, []);
+}
+
 function notImplemented() {
   throw new Error("Корзина ещё не реализована. Сначала прочитайте тесты.");
 }
 
-function removeFromCart() {
-  return notImplemented();
-}
 function calculateCartSubtotal() {
   return notImplemented();
 }
